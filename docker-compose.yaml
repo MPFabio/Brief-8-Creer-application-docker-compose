@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  frontend:
+    build: .
+    image: frontend
+    container_name: frontend
+    ports:
+      - "9090:9090"
+      - "9191:9191"
+    networks:
+      - projectnetwork
+
+  backend:
+    image: amouat/dnmonster:latest
+    ports:
+      - "8080"
+    container_name: backend
+    networks:
+      - projectnetwork
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379"
+    container_name: redis
+    networks:
+      - projectnetwork
+
+networks:
+  projectnetwork:
+    driver: bridge
